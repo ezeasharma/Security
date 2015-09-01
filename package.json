@@ -1,0 +1,26 @@
+{
+  "name": "security",
+  "version": "1.0.0",
+  "description": "This is security microservice.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ezeasharma/Security.git"
+  },
+  "keywords": [
+    "Stock"
+  ],
+  "author": "Ashish Sharma",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ezeasharma/Security/issues"
+  },
+  "dependencies": {
+    "express": "~4.13.3",
+    "request": "~2.61.0",
+    "body-parser": "~1.13.3"
+  }
+}
