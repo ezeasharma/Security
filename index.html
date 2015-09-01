@@ -4,11 +4,27 @@
 		<title>Security</title>
 		<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="index.js"></script>
+		<style>
+			#noteLabel{
+				color: red;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Welcome to Security Service! </h1>
+		<label id="noteLabel">Note: My subscription doesnot provide NASDAQ data. Talking to xignite to get this resolved</label>
+		<br/>
+		<br/>
+		<div id="securityIdentifiersDiv">
+			<label>Identifier Types:  </label><select id="securityIdentifiersDropdown" >
+				<option value="loading">Loading......</option>
+			</select>
+			</br>
+		</div>
+		</br>
 		<label>Symbol: </label><input type="text" id="symbolTextBox"></input>
 		<button id="getSecurityButton" type="button">Get</button>
 		<h2 id="securityDescriptionLabel"></h2>
+		<div id="displayDiv"></div>
 	</body>
 </html>
