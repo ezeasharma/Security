@@ -1,32 +1,25 @@
 $(function(){
-	var securityFields = ["Outcome","Last", "LastSize", "Open", "High", "Low", "Close", "Volume", "Message", "Delay", "Date", "Time", "UTCOffset", ];
-	
-	$.get('/IdentifierTypes')
-	.done(function(response){
-		var identifiersDropdown = $('#securityIdentifiersDropdown');
-		identifiersDropdown.empty();
-		for(var i = 0; i < response.length; i++)
+	$.get('/adapters')
+	.done(function(adapters){
+		var adaptersDropdown = $('#adaptersDropdown');
+		adaptersDropdown.empty();
+		for(var i = 0; i < adapters.length; i++)
 		{
-			identifiersDropdown.append(new Option(response[i].Name, response[i].Name, false, false));
+			adaptersDropdown.append(new Option(adapters[i].Name, adapters[i].Name, false, false));
 		}
 	})
 	.fail(function(error){
-		console.log(error);
-    	alert('Error getting security identifiers. Status = ' + error.status + ' ' + error.responseText);
-	})
+		alert(error);
+	});
+	
 	$('#getSecurityButton').click(function(){
 		$('#securityDescriptionLabel').text('Loading.......');
 		var securitiesArray = $('#symbolTextBox').val().split(';');
 		for(var i = 0; i < securitiesArray.length; i++)
 		{
-			$.post('/Securities', { IdentifierType : $('#securityIdentifiersDropdown').val(), Identifier : securitiesArray[i]})
+			$.post('/Securities', { IdentifierType : 'Symbol', Identifier : securitiesArray[i], Adapter : $('#adaptersDropdown').val()})
 				.done(function(response){
-				//$('#securityDescriptionLabel').text("");
-					
-				// $.each(response, function(key, value) {
-   				// 	$('#displayDiv').append('<p>' + key + '-->' + value + '</p>')
-				// });
-				$('#securityDescriptionLabel').text(JSON.stringify(response));
+					$('#securityDescriptionLabel').text(JSON.stringify(response));
 			})
 			.fail(function(error){
 				console.log(error);
