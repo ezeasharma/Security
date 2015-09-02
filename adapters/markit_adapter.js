@@ -23,7 +23,26 @@ MarkitAdapter.prototype.getPrice = function(identifierType, identifier, success,
 		try {
 			if(!error && response.statusCode == 200)
 			{
-				var security = JSON.parse(body);
+				var sourceSecurity = JSON.parse(body);
+				var security = {
+					Source: "MarkitOnDemand",
+					Symbol : sourceSecurity.Symbol,
+					Description : sourceSecurity.Name,
+					Type : "Not Provided",
+					Last : sourceSecurity.LastPrice,
+					Open : sourceSecurity.Open,
+					Low : sourceSecurity.Low,
+					High : sourceSecurity.High,
+					Change : sourceSecurity.Change,
+					ChangePercent : sourceSecurity.ChangePercent,
+					LastVolume : sourceSecurity.Volume,
+					Bid : "Not Provided",
+					BidSize : "Not Provided",
+					Ask : "Not Privided",
+					AskSize : "Not Privided",
+					High52Weeks : "Not Privided",
+					Low52Weeks : "Not Privided"
+				};
 				success(security);
 			}
 			else

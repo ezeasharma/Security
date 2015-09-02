@@ -25,8 +25,7 @@ app.get('/adapters', function(req, res){
 	res.json(adapter.getAdapters());
 });
 
-app.post('/Securities', function(req, res){
-	
+app.post('/Securities', function(req, res){	
 	var identifierType = req.body.IdentifierType;
 	var identifier = req.body.Identifier;
 	var priceAdapter = req.body.Adapter;
@@ -40,33 +39,6 @@ app.post('/Securities', function(req, res){
 		res.status(400).send(error);
 	}
 	adapter.getPrice(identifierType, identifier, success, fail, priceAdapter);
-	// var options = {
-  	// 	//url: createXigniteUrl(identifierType, identifier),
-	// 	url : 'https://sandbox.tradier.com/v1/markets/quotes?symbols=SPY',
-  	// 	method: 'GET',
-	// 	data : {},
-	// 	headers: {Authorization : 'Bearer ' +  'lkNtdEejGNnzlsvrrYAP6g0LgMvh', Accept : 'application/json'}
-    // }
-	// 
-	// console.log('Url: ' + options.url);
-	// request.get(options, function(error, response, body){
-	// 	try {
-	// 		console.log(body);
-	// 		console.log(error);
-	// 		//console.log(response);
-	// 		if(!error && response.statusCode == 200)
-	// 		{
-	// 			var security = JSON.parse(body);
-	// 			if(security.Outcome != "Success")
-	// 				throw body;
-	// 			res.json(security);
-	// 		}
-	// 		else
-	// 			throw error;
-	// 	} catch (error) {
-	// 		res.status(400).send(error);
-	// 	}
-	// });
 });
 
 app.listen(3000, function(){

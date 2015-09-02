@@ -24,7 +24,28 @@ TradierAdapter.prototype.getPrice = function(identifierType, identifier, success
 		try {
 			if(!error && response.statusCode == 200)
 			{
-				var security = JSON.parse(body);
+				var sourceSecurities = JSON.parse(body);
+				console.log(sourceSecurities);
+				var sourceSecurity = sourceSecurities.quotes.quote;
+				var security = {
+					Source: "Tradier",
+					Symbol : sourceSecurity.symbol,
+					Description : sourceSecurity.description,
+					Type : sourceSecurity.type,
+					Last : sourceSecurity.last,
+					Open : sourceSecurity.open,
+					Low : sourceSecurity.low,
+					High : sourceSecurity.high,
+					Change : sourceSecurity.change,
+					ChangePercent : sourceSecurity.change_percentage,
+					LastVolume : sourceSecurity.volume,
+					Bid : sourceSecurity.bid,
+					BidSize : sourceSecurity.bidsize,
+					Ask : sourceSecurity.ask,
+					AskSize : sourceSecurity.asksize,
+					High52Weeks : sourceSecurity.week_52_high,
+					Low52Weeks : sourceSecurity.week_52_low
+				};
 				success(security);
 			}
 			else

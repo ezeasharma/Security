@@ -20,15 +20,38 @@ XIgniteAdapter.prototype.getPrice = function(identifierType, identifier, success
 	
 	request.get(options, function(error, response, body){
 		try {
+			console.log('Response recieved - ' + response.statusCode + ' - ' + error) ;
 			if(!error && response.statusCode == 200)
 			{
-				var security = JSON.parse(body);
-				if(security.Outcome != "Success")
+				var sourceSecurity = JSON.parse(body);
+				if(sourceSecurity.Outcome != "Success")
 					throw body;
+				var security = {
+					Source: "XIgnite",
+					Symbol : sourceSecurity.Security.Symbol,
+					Description : sourceSecurity.Security.Name,
+					Type : "Not Provided",
+					Last : sourceSecurity.Last,
+					Open : sourceSecurity.Open,
+					Low : sourceSecurity.Low,
+					High : sourceSecurity.High,
+					Change : sourceSecurity.ChangeFromPreviousClose,
+					ChangePercent : sourceSecurity.PercentChangeFromPreviousClose,
+					LastVolume : sourceSecurity.Volume,
+					Bid : sourceSecurity.Bid,
+					BidSize : sourceSecurity.bidSize,
+					Ask : sourceSecurity.Ask,
+					AskSize : sourceSecurity.AskSize,
+					High52Weeks : sourceSecurity.High52Weeks,
+					Low52Weeks : sourceSecurity.Low52Weeks
+				};
 				success(security);
 			}
 			else
-				throw error;
+				{
+					console.log('Errro - ' + error);
+					throw error;
+				}
 		} catch (error) {
 			fail(error);
 		}
